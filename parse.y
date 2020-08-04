@@ -4115,6 +4115,19 @@ eof_error:
 /*itrace("parse_comsub:%d: set lex_reswordok = 1, ch = `%c'", line_number, ch);*/
 	      tflags |= LEX_RESWDOK;
 	      lex_rwlen = 0;
+	      if (ch == peekc && (ch == ';'))
+		{
+		  /* Check for SEMI_SEMI_AND. */
+		  peekc = shell_getc (1);
+		  if (peekc == '&')
+		    {
+		      ret[retind++] = peekc;
+		    }
+		  else
+		    {
+		      shell_ungetc(peekc);
+		    }
+		}
 	      continue;
 	    }
 	  else if (ch == '\n' || COMSUB_META(ch))
