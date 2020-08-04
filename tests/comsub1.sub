@@ -58,3 +58,27 @@ case $(echo $$'x\nx') in
 x*)	echo bad 7;;
 *)	echo ok 7;;
 esac
+
+echo $(case a in (a) echo ok 8;;& # comment
+esac)
+
+echo $(case a in (a) echo ok 9;;& # comment
+(b) echo moo;;&
+esac)
+
+echo $(case a in (a) echo ok 10 # comment
+;;&
+esac)
+
+echo $(case a in a) echo ok 11;;& # comment
+esac)
+
+echo $(case a in a) echo ok 12;;& # comment
+b) echo moo;;&
+esac)
+
+echo $(case a in (a) echo ok 13 # comment
+;;&
+esac)
+
+echo $(case a in (a) echo ok 14;;& esac)
